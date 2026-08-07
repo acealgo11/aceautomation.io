@@ -1,0 +1,1 @@
+read -rs 'TOKEN?Paste GitHub token, then press Enter: ' && printf 'protocol=https\nhost=github.com\nusername=acealgo11\npassword=%s\n\n' "$TOKEN" | git credential-osxkeychain store && printf 'protocol=https\nhost=github.com\n\n' | git credential-osxkeychain get | grep -q '^password=' && echo STORED_OK || echo STORED_FAIL
