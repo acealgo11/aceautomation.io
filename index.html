@@ -178,9 +178,6 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   letter-spacing:-.01em;
 }
 @media(max-width:768px){.hero-h1{font-size:23px;letter-spacing:-.02em;padding:0 8px}}
-@media(max-width:480px){
-  #risk-banner{font-size:10.5px !important;line-height:1.45 !important;padding:8px 12px !important}
-}
 
 .hero-sub{
   font-size:clamp(15px,2vw,18px);
@@ -781,15 +778,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
 </head>
 <body>
 
-<!-- TOP BAR — banner + nav share one fixed container so nav can never
-     detach from the banner's actual height, eliminating the scroll-gap glitch -->
+<!-- TOP BAR — nav only (risk banner removed per request) -->
 <div id="top-bar" style="position:fixed;top:0;left:0;right:0;z-index:200">
-
-<!-- RISK BANNER — mandatory -->
-<div id="risk-banner" style="background:#1a1a1a;border-bottom:1px solid rgba(255,255,255,.15);padding:9px 20px;text-align:center;font-size:12px;color:rgba(255,255,255,.7);line-height:1.5">
-  CFDs and forex carry a high level of risk. 76% of retail accounts lose money with CFDs. You could lose some or all of your capital. Past performance is not a reliable indicator of future results.
-  <button id="risk-banner-close" aria-label="Dismiss disclaimer" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;margin-left:12px;vertical-align:middle;padding:0;line-height:1">✕</button>
-</div>
 
 <!-- NAV -->
 <nav id="nav" role="navigation">
@@ -805,42 +795,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
 </div><!-- /#top-bar -->
 
 <script>
-  // Banner + nav live inside one fixed wrapper (#top-bar), which never moves.
-  // We only ever toggle the banner's display — nav simply flows to sit flush
-  // under whatever the banner's current height is. No animation, no separate
-  // fixed elements to desync, so the scroll-gap glitch can't happen.
+  // Nav lives inside #top-bar, which never moves. --topbar-h tracks its
+  // measured height so the hero's top padding always sits flush beneath it.
   (function(){
     var topBar = document.getElementById('top-bar');
-    var banner = document.getElementById('risk-banner');
     var root = document.documentElement;
-    var dismissed = false;
-    var collapsed = false;
 
     function measure(){
       root.style.setProperty('--topbar-h', topBar.offsetHeight + 'px');
     }
     measure();
     window.addEventListener('resize', measure);
-
-    document.getElementById('risk-banner-close').addEventListener('click', function(){
-      dismissed = true;
-      banner.style.display = 'none';
-      measure();
-    });
-
-    function onScroll(){
-      if(dismissed) return;
-      if(window.scrollY > 80 && !collapsed){
-        collapsed = true;
-        banner.style.display = 'none';
-        measure();
-      } else if(window.scrollY <= 80 && collapsed){
-        collapsed = false;
-        banner.style.display = '';
-        measure();
-      }
-    }
-    window.addEventListener('scroll', onScroll, {passive:true});
   })();
 </script>
 
@@ -848,7 +813,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
 <section id="hero">
   <div class="container hero-inner">
     <p class="hero-pre">AI isn't coming to the markets. It's already here.</p>
-    <h1 class="hero-h1 display">Outsmart The Manual Way.<br>Outperform The Traditional One.<br>Leverage AI.<br>While You Live Your Life.</h1>
+    <h1 class="hero-h1 display">Outsmart The Manual Way. Outperform The Traditional One. Leverage AI While You Live Your Life.</h1>
     <p class="hero-sub">Our fully automated AI system that operates directly in your own account — zero charts, zero screen time, zero guesswork.</p>
 
     <p class="step-label"><span>1</span> Step 1: Watch the video below</p>
@@ -881,7 +846,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
     <p class="sub" style="max-width:560px">We limit intake each month to maintain performance standards. Complete the short application below to check your eligibility.</p>
     <div class="tf-wrap">
       <!-- iClosed inline widget begin -->
-      <div class="iclosed-widget" data-url="https://app.iclosed.io/e/acealgo/ace-algo-advisory-call" title="Ace Algo Advisory Call" style="width: 100%; height: 620px"></div>
+      <div class="iclosed-widget" data-url="https://app.iclosed.io/e/acealgo/ace-algo-advisory-call-us" title="Ace Algo Advisory Call - US" style="width: 100%; height: 620px"></div>
       <!-- iClosed inline widget end -->
       <!-- Whop conversion tracking: map iClosed funnel events to Whop pixel events.
            lead     <- iClosed "potential" (visitor submits contact info)
@@ -984,7 +949,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
         <div class="vs-head">What you were told</div>
         <div class="vs-body">
           <div class="vs-item"><span class="vs-icon">—</span><span>Put it all in an index fund and wait</span></div>
-          <div class="vs-item"><span class="vs-icon">—</span><span>Your pension/ISA will take care of retirement</span></div>
+          <div class="vs-item"><span class="vs-icon">—</span><span>Your IRA/401(k) will take care of retirement</span></div>
           <div class="vs-item"><span class="vs-icon">—</span><span>Time in the market beats timing the market</span></div>
           <div class="vs-item"><span class="vs-icon">—</span><span>Fill up the 4% a year savings account</span></div>
           <div class="vs-item"><span class="vs-icon">—</span><span>Learn to do it manually</span></div>
@@ -994,7 +959,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
         <div class="vs-head">The reality</div>
         <div class="vs-body">
           <div class="vs-item"><span class="vs-icon">→</span><span>Waiting is a strategy. It's just not the only one.</span></div>
-          <div class="vs-item"><span class="vs-icon">→</span><span>Your pension/ISA is one plan. It was never meant to be the whole plan.</span></div>
+          <div class="vs-item"><span class="vs-icon">→</span><span>Your IRA/401(k) is one plan. It was never meant to be the whole plan.</span></div>
           <div class="vs-item"><span class="vs-icon">→</span><span>Time in the market only works if you never need the money early.</span></div>
           <div class="vs-item"><span class="vs-icon">→</span><span>A savings account is a parking spot, not a vehicle.</span></div>
           <div class="vs-item"><span class="vs-icon">→</span><span>The manual way takes years most people don't have. That's exactly why we built a machine to do it instead.</span></div>
@@ -1058,13 +1023,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
             <th class="col-ace">This System</th>
             <th class="col-other">Other Systems</th>
             <th class="col-other">Manual</th>
-            <th class="col-other">Pension / ISA</th>
+            <th class="col-other">IRA / 401(k)</th>
           </tr>
         </thead>
         <tbody>
           <tr><td>Multiple<br>Risk Profiles</td><td class="col-ace"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
           <tr><td>Trades in<br>Your Account</td><td class="col-ace"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
-          <tr><td>Withdraw<br>Anytime</td><td class="col-ace"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">Age 67+</span></td></tr>
+          <tr><td>Withdraw<br>Anytime</td><td class="col-ace"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">Age 59½+</span></td></tr>
           <tr><td>See Every<br>Trade Live</td><td class="col-ace"><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
         </tbody>
       </table>
@@ -1130,62 +1095,62 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
     <div class="testimonials-grid" id="tgrid">
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">Austin, TX, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"Set up in one call. By that evening I was watching trades hit my own account."</div>
-        <img src="https://i.ibb.co/GQGnVN9Q/T1.png" alt="Sarah Jenkins" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-sarah-jenkins.webp" alt="Sarah Jenkins" class="tcard-img" loading="lazy">
       </div>
 
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Manchester, UK</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Chicago, IL, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"Tried two other systems. This is the only one I didn't have to babysit."</div>
-        <img src="https://i.ibb.co/C5SRYwmw/imageye-imgi-72-k0-Hk-MKtytll1p-Bdo-I0-Yt-U3-FUc.webp" alt="Carlton Grimm" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-carlton-grimm.webp" alt="Carlton Grimm" class="tcard-img" loading="lazy">
       </div>
 
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Dublin, Ireland</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Denver, CO, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"I tried learning to trade twice and quit twice. This just runs. I don't touch anything."</div>
-        <img src="https://i.ibb.co/7xZJ2zb0/T2.png" alt="Ben Davies" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-ben-davies.webp" alt="Ben Davies" class="tcard-img" loading="lazy">
       </div>
 
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">New York, NY, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"What sold me was the control. My money, my account, and I can see every single position live."</div>
-        <img src="https://i.ibb.co/cKLWnD3C/imageye-imgi-12-TKe-S26-Uq-M1c-UI6o0-QXJIGXLYUH0.webp" alt="Lewis McCaulay" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-lewis-mccaulay.webp" alt="Lewis McCaulay" class="tcard-img" loading="lazy">
       </div>
 
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Birmingham, UK</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Houston, TX, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"No lockups was the dealbreaker for me. I tested a withdrawal in week one and it hit my bank next day."</div>
-        <img src="https://i.ibb.co/pBBSbX31/T3.png" alt="Liam Patel" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-liam-patel.webp" alt="Liam Patel" class="tcard-img" loading="lazy">
       </div>
 
       <div class="tcard">
         <div class="tcard-top">
-          <div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Sydney, Australia</span></div>
+          <div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Miami, FL, US</span></div>
         </div>
         <div class="tcard-result" style="font-size:15px;font-weight:600;line-height:1.5">"The transparency is what got me. You see every trade as it happens. No black box."</div>
-        <img src="https://i.ibb.co/Hp3P6ZwZ/imageye-imgi-80-l93-GPm-HUp-Sp-Vy-OKuc-POb-BZLFA6s.webp" alt="Sam Morley" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-sam-morley.webp" alt="Sam Morley" class="tcard-img" loading="lazy">
       </div>
     </div>
 
     <!-- Mobile carousel -->
     <div class="tcarousel" id="tcarousel" aria-label="Member testimonials">
       <div class="tcarousel-track" id="ttrack">
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"Set up in one call. By that evening I was watching trades hit my own account."</div><img src="https://i.ibb.co/GQGnVN9Q/T1.png" alt="Sarah Jenkins" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Manchester, UK</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"Tried two other systems. This is the only one I didn't have to babysit."</div><img src="https://i.ibb.co/C5SRYwmw/imageye-imgi-72-k0-Hk-MKtytll1p-Bdo-I0-Yt-U3-FUc.webp" alt="Carlton Grimm" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Dublin, Ireland</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"I tried learning to trade twice and quit twice. This just runs. I don't touch anything."</div><img src="https://i.ibb.co/7xZJ2zb0/T2.png" alt="Ben Davies" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"What sold me was the control. My money, my account, and I can see every single position live."</div><img src="https://i.ibb.co/cKLWnD3C/imageye-imgi-12-TKe-S26-Uq-M1c-UI6o0-QXJIGXLYUH0.webp" alt="Lewis McCaulay" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Birmingham, UK</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"No lockups was the dealbreaker for me. I tested a withdrawal in week one and it hit my bank next day."</div><img src="https://i.ibb.co/pBBSbX31/T3.png" alt="Liam Patel" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Sydney, Australia</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"The transparency is what got me. You see every trade as it happens. No black box."</div><img src="https://i.ibb.co/Hp3P6ZwZ/imageye-imgi-80-l93-GPm-HUp-Sp-Vy-OKuc-POb-BZLFA6s.webp" alt="Sam Morley" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">Austin, TX, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"Set up in one call. By that evening I was watching trades hit my own account."</div><img src="/images/testimonial-sarah-jenkins.webp" alt="Sarah Jenkins" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Chicago, IL, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"Tried two other systems. This is the only one I didn't have to babysit."</div><img src="/images/testimonial-carlton-grimm.webp" alt="Carlton Grimm" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Denver, CO, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"I tried learning to trade twice and quit twice. This just runs. I don't touch anything."</div><img src="/images/testimonial-ben-davies.webp" alt="Ben Davies" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">New York, NY, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"What sold me was the control. My money, my account, and I can see every single position live."</div><img src="/images/testimonial-lewis-mccaulay.webp" alt="Lewis McCaulay" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Houston, TX, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"No lockups was the dealbreaker for me. I tested a withdrawal in week one and it hit my bank next day."</div><img src="/images/testimonial-liam-patel.webp" alt="Liam Patel" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Miami, FL, US</span></div></div><div class="tcard-result" style="font-size:14px;font-weight:600;line-height:1.5">"The transparency is what got me. You see every trade as it happens. No black box."</div><img src="/images/testimonial-sam-morley.webp" alt="Sam Morley" class="tcard-img" loading="lazy"></div>
       </div>
       <div class="tcarousel-dots" id="tdots"></div>
       <div class="tcarousel-btns">
