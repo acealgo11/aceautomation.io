@@ -17,7 +17,7 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap"></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 img{max-width:100%;height:auto;display:block}
 :root{
   --black:#000000;
@@ -88,12 +88,20 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   margin-bottom:24px;
   font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
   color:#000;
+  max-width:100%;
+  flex-wrap:wrap;
+  justify-content:center;
+  text-align:center;
+  row-gap:4px;
 }
 .confirm-badge .check-circle{
   width:20px;height:20px;border-radius:50%;
   background:#000;color:var(--gold);
   display:flex;align-items:center;justify-content:center;
   font-size:12px;font-weight:900;flex-shrink:0;
+}
+@media(max-width:480px){
+  .confirm-badge{font-size:10.5px;padding:9px 16px;letter-spacing:.06em;border-radius:14px}
 }
 
 .confirm-h1{
@@ -115,22 +123,23 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   font-weight:300;line-height:1.7;
 }
 
-/* reach-out notice */
+/* reach-out notice — wraps naturally on all screen sizes so it never overflows */
 .reach-out-notice{
-  display:inline-flex;align-items:center;gap:6px;
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;flex-wrap:wrap;
   background:rgba(201,168,76,.12);
   border:1px solid rgba(201,168,76,.45);
   border-radius:10px;
   padding:13px 20px;
-  font-size:clamp(11px,2.1vw,15px);font-weight:600;color:rgba(255,255,255,.95);
+  font-size:clamp(12.5px,2.6vw,15px);font-weight:600;color:rgba(255,255,255,.95);
   max-width:100%;margin:0 auto 24px;
-  line-height:1.5;
-  white-space:nowrap;justify-content:center;text-align:center;
+  line-height:1.55;
+  text-align:center;
+  box-sizing:border-box;
 }
 .reach-out-notice .gold{font-weight:800;white-space:nowrap}
 @media(max-width:480px){
-  .reach-out-notice{white-space:normal;flex-wrap:wrap;padding:13px 16px}
-  .reach-out-notice .gold{white-space:normal}
+  .reach-out-notice{padding:13px 16px}
 }
 
 /* urgency live dot bar */
@@ -142,6 +151,11 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   padding:11px 20px;
   font-size:14px;font-weight:600;color:rgba(255,255,255,.9);
   margin-bottom:36px;
+  max-width:100%;
+  flex-wrap:wrap;
+  justify-content:center;
+  text-align:center;
+  box-sizing:border-box;
 }
 .urgency-dot{
   width:9px;height:9px;border-radius:50%;
@@ -151,6 +165,9 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   flex-shrink:0;
 }
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@media(max-width:480px){
+  .urgency-bar{font-size:12.5px;padding:11px 14px}
+}
 
 /* wistia embed */
 .wistia-wrap{
@@ -178,6 +195,7 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   line-height:1.55;
   position:relative;
   z-index:1;
+  box-sizing:border-box;
 }
 .prep-step + .prep-step{margin-top:10px}
 .prep-step .ps-num{
@@ -186,6 +204,9 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   display:flex;align-items:center;justify-content:center;
   font-size:13px;font-weight:900;font-family:var(--font-display);
   margin-top:1px;
+}
+@media(max-width:480px){
+  .prep-step{font-size:13.5px;padding:12px 14px;gap:11px}
 }
 
 /* === STATS BAR === */
@@ -386,6 +407,7 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);lin
   border:1px solid rgba(201,168,76,.45);
   border-radius:12px;padding:28px 26px;
   transition:border-color .2s,transform .2s,box-shadow .2s;
+  box-sizing:border-box;
 }
 .tcard:hover{border-color:rgba(201,168,76,.9);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 0 1px rgba(201,168,76,.4)}
 .tcard-top{margin-bottom:14px}
@@ -455,11 +477,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:24px;">
         <div class="confirm-badge" style="margin-bottom:0;">
           <div class="check-circle">✓</div>
-          Your call is scheduled
+          Your call is scheduled, not confirmed
         </div>
 
         <div class="reach-out-notice" style="margin-bottom:0;">
-          A member of the team will reach out from <span class="gold">+44 7462 123336</span> to confirm your call.
+          A member of the team will reach out from <span class="gold">+1 904-746-1423</span> to confirm your call.
         </div>
       </div>
 
@@ -632,7 +654,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
 
 <hr class="section-rule">
 
-<!-- TESTIMONIALS — exact match from main lander -->
+<!-- TESTIMONIALS — matches main lander, US locations + local images -->
 <section id="testimonials">
   <div class="blue-glow-right"></div>
   <div class="container">
@@ -643,46 +665,46 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.07);paddin
     <!-- Desktop grid -->
     <div class="testimonials-grid" id="tgrid">
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">Austin, TX, US</span></div></div>
         <div class="tcard-result">+15%<span class="tcard-result-label">in 1 month</span></div>
-        <img src="https://i.ibb.co/GQGnVN9Q/T1.png" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-sarah-jenkins.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Manchester, UK</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Chicago, IL, US</span></div></div>
         <div class="tcard-result">+41%<span class="tcard-result-label">in 3 months</span></div>
-        <img src="https://i.ibb.co/C5SRYwmw/imageye-imgi-72-k0-Hk-MKtytll1p-Bdo-I0-Yt-U3-FUc.webp" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-carlton-grimm.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Dublin, Ireland</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Denver, CO, US</span></div></div>
         <div class="tcard-result">+59%<span class="tcard-result-label">in 4 months</span></div>
-        <img src="https://i.ibb.co/7xZJ2zb0/T2.png" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-ben-davies.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">New York, NY, US</span></div></div>
         <div class="tcard-result">+45%<span class="tcard-result-label">in 3 months</span></div>
-        <img src="https://i.ibb.co/cKLWnD3C/imageye-imgi-12-TKe-S26-Uq-M1c-UI6o0-QXJIGXLYUH0.webp" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-lewis-mccaulay.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Birmingham, UK</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Houston, TX, US</span></div></div>
         <div class="tcard-result">$1k<span class="tcard-result-label">in 5 days</span></div>
-        <img src="https://i.ibb.co/pBBSbX31/T3.png" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-liam-patel.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
       <div class="tcard">
-        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Sydney, Australia</span></div></div>
+        <div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Miami, FL, US</span></div></div>
         <div class="tcard-result">+69%<span class="tcard-result-label">in 5 months</span></div>
-        <img src="https://i.ibb.co/Hp3P6ZwZ/imageye-imgi-80-l93-GPm-HUp-Sp-Vy-OKuc-POb-BZLFA6s.webp" alt="Member result" class="tcard-img" loading="lazy">
+        <img src="/images/testimonial-sam-morley.webp" alt="Member result" class="tcard-img" loading="lazy">
       </div>
     </div>
 
     <!-- Mobile carousel -->
     <div class="tcarousel" id="tcarousel" aria-label="Member testimonials">
       <div class="tcarousel-track" id="ttrack">
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div><div class="tcard-result">+15%<span class="tcard-result-label">in 1 month</span></div><img src="https://i.ibb.co/GQGnVN9Q/T1.png" alt="Member result" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Manchester, UK</span></div></div><div class="tcard-result">+41%<span class="tcard-result-label">in 3 months</span></div><img src="https://i.ibb.co/C5SRYwmw/imageye-imgi-72-k0-Hk-MKtytll1p-Bdo-I0-Yt-U3-FUc.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Dublin, Ireland</span></div></div><div class="tcard-result">+59%<span class="tcard-result-label">in 4 months</span></div><img src="https://i.ibb.co/7xZJ2zb0/T2.png" alt="Member result" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">London, UK</span></div></div><div class="tcard-result">+45%<span class="tcard-result-label">in 3 months</span></div><img src="https://i.ibb.co/cKLWnD3C/imageye-imgi-12-TKe-S26-Uq-M1c-UI6o0-QXJIGXLYUH0.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Birmingham, UK</span></div></div><div class="tcard-result">$1k<span class="tcard-result-label">in 5 days</span></div><img src="https://i.ibb.co/pBBSbX31/T3.png" alt="Member result" class="tcard-img" loading="lazy"></div>
-        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Sydney, Australia</span></div></div><div class="tcard-result">+69%<span class="tcard-result-label">in 5 months</span></div><img src="https://i.ibb.co/Hp3P6ZwZ/imageye-imgi-80-l93-GPm-HUp-Sp-Vy-OKuc-POb-BZLFA6s.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sarah Jenkins</span><span class="tcard-sep">·</span><span class="tcard-loc">Austin, TX, US</span></div></div><div class="tcard-result">+15%<span class="tcard-result-label">in 1 month</span></div><img src="/images/testimonial-sarah-jenkins.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Carlton Grimm</span><span class="tcard-sep">·</span><span class="tcard-loc">Chicago, IL, US</span></div></div><div class="tcard-result">+41%<span class="tcard-result-label">in 3 months</span></div><img src="/images/testimonial-carlton-grimm.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Ben Davies</span><span class="tcard-sep">·</span><span class="tcard-loc">Denver, CO, US</span></div></div><div class="tcard-result">+59%<span class="tcard-result-label">in 4 months</span></div><img src="/images/testimonial-ben-davies.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Lewis McCaulay</span><span class="tcard-sep">·</span><span class="tcard-loc">New York, NY, US</span></div></div><div class="tcard-result">+45%<span class="tcard-result-label">in 3 months</span></div><img src="/images/testimonial-lewis-mccaulay.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Liam Patel</span><span class="tcard-sep">·</span><span class="tcard-loc">Houston, TX, US</span></div></div><div class="tcard-result">$1k<span class="tcard-result-label">in 5 days</span></div><img src="/images/testimonial-liam-patel.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
+        <div class="tcard"><div class="tcard-top"><div class="tcard-identity"><span class="tcard-name">Sam Morley</span><span class="tcard-sep">·</span><span class="tcard-loc">Miami, FL, US</span></div></div><div class="tcard-result">+69%<span class="tcard-result-label">in 5 months</span></div><img src="/images/testimonial-sam-morley.webp" alt="Member result" class="tcard-img" loading="lazy"></div>
       </div>
       <div class="tcarousel-dots" id="tdots"></div>
       <div class="tcarousel-btns">
